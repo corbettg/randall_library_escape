@@ -1,3 +1,11 @@
+## Developer Notes
+If you would like to use this repository, you will have to follow 3 main steps:
+ - Download or clone this repository to your local machine
+ - In terminal or powershell cd to the folders root and run the command: composer install
+ - Create a .env file from the .env.example file using the command: copy .env.example .env
+ - Generate a key for the application using: php artisan key:generate
+ - Configure your env file and then run: php artisan migrate
+
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
