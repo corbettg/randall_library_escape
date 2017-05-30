@@ -25,14 +25,14 @@
       padding: 80px 120px;
   }
   .person {
-      border: 10px solid transparent;
+      border: 10px solid #ccc;
       margin-bottom: 25px;
       width: 80%;
       height: 80%;
       opacity: 0.7;
   }
   .person:hover {
-      border-color: #f1f1f1;
+      border-color: #006666;
   }
   .carousel-inner img {
       -webkit-filter: grayscale(90%);
@@ -153,7 +153,7 @@
   }
   </style>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="50">
 
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
@@ -163,23 +163,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#myPage">Logo</a>
+      <a class="navbar-brand" href="#home">WILLIAM MADISON RANDALL LIBRARY</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#myPage">HOME</a></li>
-        <li><a href="#band">BAND</a></li>
-        <li><a href="#tour">TOUR</a></li>
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#reserve">RESERVE</a></li>
         <li><a href="#contact">CONTACT</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Merchandise</a></li>
-            <li><a href="#">Extras</a></li>
-            <li><a href="#">Media</a></li>
-          </ul>
-        </li>
+        <li><a href="#reviews">REVIEWS</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
       </ul>
     </div>
@@ -200,7 +192,7 @@
         <img src="images/randall.jpg" alt="Randall01" width="100%" height="600">
         <div class="carousel-caption">
           <h3>Randall Library 1</h3>
-          <p>The atmosphere in New York is lorem ipsum.</p>
+          <p>Image 1 of Randall Library</p>
         </div>
       </div>
 
@@ -208,7 +200,7 @@
         <img src="images/randall.jpg" alt="Randall02" width="100%" >
         <div class="carousel-caption">
           <h3>Randall Library 2</h3>
-          <p>Thank you, Chicago - A night we won't forget.</p>
+          <p>Image 2 of Randall Library</p>
         </div>
       </div>
 
@@ -216,7 +208,7 @@
         <img src="images/randall.jpg" alt="Randall03" width="100%" >
         <div class="carousel-caption">
           <h3>Randall Library 3</h3>
-          <p>Even though the traffic was a mess, we had the best time playing at Venice Beach!</p>
+          <p>Image 3 of Randall Library</p>
         </div>
       </div>
     </div>
@@ -232,86 +224,61 @@
     </a>
 </div>
 
-<!-- Container (The Band Section) -->
-<div id="band" class="container text-center">
-  <h3>THE BAND</h3>
-  <p><em>We love music!</em></p>
-  <p>We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<!-- Container (The About Section) -->
+<div id="about" class="container text-center">
+  <h3>ABOUT</h3>
+  <p><em>RANDALL LIBRARY ESCAPE 2017</em></p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
   <br>
   <div class="row">
     <div class="col-sm-4">
-      <p class="text-center"><strong>Name</strong></p><br>
+      <p class="text-center"><strong>SOMETHING 1</strong></p><br>
       <a href="#demo" data-toggle="collapse">
-        <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+        <img src="images/sammy.gif" class="img-circle person" alt="Random Name" width="100" height="100">
       </a>
       <div id="demo" class="collapse">
-        <p>Guitarist and Lead Vocalist</p>
-        <p>Loves long walks on the beach</p>
-        <p>Member since 1988</p>
+        <p>More Info 1</p>
+        <p>More Info 2</p>
+        <p>More Info 3</p>
       </div>
     </div>
     <div class="col-sm-4">
-      <p class="text-center"><strong>Name</strong></p><br>
+      <p class="text-center"><strong>SOMETHING 1</strong></p><br>
       <a href="#demo2" data-toggle="collapse">
-        <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+        <img src="images/sammy.gif" class="img-circle person" alt="Random Name" width="100" height="100">
       </a>
       <div id="demo2" class="collapse">
-        <p>Drummer</p>
-        <p>Loves drummin'</p>
-        <p>Member since 1988</p>
+        <p>More Info 1</p>
+        <p>More Info 2</p>
+        <p>More Info 3</p>
       </div>
     </div>
     <div class="col-sm-4">
-      <p class="text-center"><strong>Name</strong></p><br>
+      <p class="text-center"><strong>SOMETHING 1</strong></p><br>
       <a href="#demo3" data-toggle="collapse">
-        <img src="bandmember.jpg" class="img-circle person" alt="Random Name" width="255" height="255">
+        <img src="images/sammy.gif" class="img-circle person" alt="Random Name" width="100" height="100">
       </a>
       <div id="demo3" class="collapse">
-        <p>Bass player</p>
-        <p>Loves math</p>
-        <p>Member since 2005</p>
+        <p>More Info 1</p>
+        <p>More Info 2</p>
+        <p>More Info 3</p>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Container (TOUR Section) -->
-<div id="tour" class="bg-1">
+<div id="reserve" class="bg-1">
   <div class="container">
-    <h3 class="text-center">TOUR DATES</h3>
-    <p class="text-center">Lorem ipsum we'll play you some music.<br> Remember to book your tickets!</p>
+    <h3 class="text-center">RESERVE</h3>
+    <p class="text-center">Lorem ipsum we'll play you some music.<br> ..............</p>
     <ul class="list-group">
-      <li class="list-group-item">September <span class="label label-danger">Sold Out!</span></li>
-      <li class="list-group-item">October <span class="label label-danger">Sold Out!</span></li>
-      <li class="list-group-item">November <span class="badge">3</span></li>
+      <li class="list-group-item">Monday <span class="badge">8 Spots Available</span> <button class="btn" data-toggle="modal" data-target="#myModal">Make Reservation</button></li>
+      <li class="list-group-item">Tuesday <span class="badge">2 Spots Available</span> <button class="btn" data-toggle="modal" data-target="#myModal">Make Reservation</button></li>
+      <li class="list-group-item">Wednesday <span class="label label-danger">Booked!</span></li>
+      <li class="list-group-item">Thursday <span class="badge">4 Spots Available</span> <button class="btn" data-toggle="modal" data-target="#myModal">Make Reservation</button></li>
+      <li class="list-group-item">Friday <span class="label label-danger">Booked!</span></li>
     </ul>
-
-    <div class="row text-center">
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="paris.jpg" alt="Paris" width="400" height="300">
-          <p><strong>Paris</strong></p>
-          <p>Friday 27 November 2015</p>
-          <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="newyork.jpg" alt="New York" width="400" height="300">
-          <p><strong>New York</strong></p>
-          <p>Saturday 28 November 2015</p>
-          <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="thumbnail">
-          <img src="sanfran.jpg" alt="San Francisco" width="400" height="300">
-          <p><strong>San Francisco</strong></p>
-          <p>Sunday 29 November 2015</p>
-          <button class="btn" data-toggle="modal" data-target="#myModal">Buy Tickets</button>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- Modal -->
@@ -322,19 +289,19 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">×</button>
-          <h4><span class="glyphicon glyphicon-lock"></span> Tickets</h4>
+          <h4><span class="glyphicon glyphicon-calendar"></span> Reservation</h4>
         </div>
         <div class="modal-body">
           <form role="form">
             <div class="form-group">
-              <label for="psw"><span class="glyphicon glyphicon-shopping-cart"></span> Tickets, $23 per person</label>
-              <input type="number" class="form-control" id="psw" placeholder="How many?">
+              <label for="psw"><span class="glyphicon glyphicon-user"></span> Name:</label>
+              <input type="number" class="form-control" id="psw" placeholder="Enter your name">
             </div>
             <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Send To</label>
+              <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> UNCW Email:</label>
               <input type="text" class="form-control" id="usrname" placeholder="Enter email">
             </div>
-              <button type="submit" class="btn btn-block">Pay
+              <button type="submit" class="btn btn-block">Reserve
                 <span class="glyphicon glyphicon-ok"></span>
               </button>
           </form>
@@ -352,15 +319,13 @@
 
 <!-- Container (Contact Section) -->
 <div id="contact" class="container">
-  <h3 class="text-center">Contact</h3>
-  <p class="text-center"><em>We love our fans!</em></p>
-
+  <h3 class="text-center">Questions</h3>
   <div class="row">
     <div class="col-md-4">
-      <p>Fan? Drop a note.</p>
-      <p><span class="glyphicon glyphicon-map-marker"></span>Chicago, US</p>
-      <p><span class="glyphicon glyphicon-phone"></span>Phone: +00 1515151515</p>
-      <p><span class="glyphicon glyphicon-envelope"></span>Email: mail@mail.com</p>
+      <p>Get Help</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> 601 S. College Road</p>
+      <p><span class="glyphicon glyphicon-phone"></span>Phone: (910) 962-3760</p>
+      <p><span class="glyphicon glyphicon-envelope"></span>Email: libref@uncw.edu</p>
     </div>
     <div class="col-md-8">
       <div class="row">
@@ -371,7 +336,7 @@
           <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
         </div>
       </div>
-      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+      <textarea class="form-control" id="comments" name="question" placeholder="Question" rows="5"></textarea>
       <br>
       <div class="row">
         <div class="col-md-12 form-group">
@@ -380,29 +345,38 @@
       </div>
     </div>
   </div>
-  <br>
-  <h3 class="text-center">From The Blog</h3>
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Mike</a></li>
-    <li><a data-toggle="tab" href="#menu1">Chandler</a></li>
-    <li><a data-toggle="tab" href="#menu2">Peter</a></li>
-  </ul>
+  </div>
 
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h2>Mike Ross, Manager</h2>
-      <p>Man, we've been on the road for some time now. Looking forward to lorem ipsum.</p>
+<div id="reviews" class="bg-1">
+  <div class="container text-center">
+    <h3 class="text-center">Reviews</h3>
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#home">Student 1</a></li>
+      <li><a data-toggle="tab" href="#menu1">Student 2</a></li>
+      <li><a data-toggle="tab" href="#menu2">Student 3</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="home" class="tab-pane fade in active">
+        <h2>Student 1</h2>
+        <p>This was the best thing ever!!</p>
+      </div>
+      <div id="menu1" class="tab-pane fade">
+        <h2>Student 2</h2>
+        <p>Man, the Randall Library ROCKS!</p>
+      </div>
+      <div id="menu2" class="tab-pane fade">
+        <h2>Student 3</h2>
+        <p>I cant wait to do this again!</p>
+      </div>
     </div>
-    <div id="menu1" class="tab-pane fade">
-      <h2>Chandler Bing, Guitarist</h2>
-      <p>Always a pleasure people! Hope you enjoyed it as much as I did. Could I BE.. any more pleased?</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h2>Peter Griffin, Bass player</h2>
-      <p>I mean, sometimes I enjoy the show, but other times I enjoy other things.</p>
+
+    <div class="row" style="margin-top: 50px;">
+      <button class="btn btn-primary">Leave Review</button>
     </div>
   </div>
 </div>
+
 
 <!-- Add Google Maps -->
 <div id="googleMap">
@@ -425,7 +399,7 @@ Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 
 <!-- Footer -->
 <footer class="text-center">
-  <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+  <a class="up-arrow" href="#home" data-toggle="tooltip" title="TO TOP">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a><br><br>
   <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" data-toggle="tooltip" title="Visit w3schools">www.w3schools.com</a></p>
@@ -437,7 +411,7 @@ $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
 
   // Add smooth scrolling to all links in navbar + footer link
-  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+  $(".navbar a, footer a[href='#home']").on('click', function(event) {
 
     // Make sure this.hash has a value before overriding default behavior
     if (this.hash !== "") {
