@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', function () { return view('home');});
+
+Route::get('/reservations', 'ReservationsController@index');
+Route::get('/sessions', 'SessionsController@index');
