@@ -10,6 +10,10 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="/js/moment-with-locales.min.js"></script>
+  <script src="/js/bootstrap-datetimepicker.min.js"></script>
+  <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
   <style>
   body {
       font: 400 15px/1.8 Lato, sans-serif;
@@ -50,7 +54,7 @@
   }
   .bg-1 {
       background: #2d2d30;
-      color: #bdbdbd;
+      color: #006666;
   }
   .bg-1 h3 {color: #fff;}
   .bg-1 p {font-style: italic;}
@@ -61,6 +65,11 @@
   .list-group-item:last-child {
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
+  }
+  .list-group-item.session_date:hover,
+  .list-group-item.session_time:hover {
+      cursor: pointer;
+      background: #ccc;
   }
   .thumbnail {
       padding: 0 0 15px 0;
@@ -179,45 +188,10 @@
 </nav>
 
 
-<!-- Container (TOUR Section) -->
-<div id="reserve" class="bg-1">
+<!-- Container (Body Sectopn) -->
+<div id="body" class="bg-1">
   <div class="container">
       @yield('content')
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">×</button>
-          <h4><span class="glyphicon glyphicon-calendar"></span> Reservation</h4>
-        </div>
-        <div class="modal-body">
-          <form role="form">
-            <div class="form-group">
-              <label for="psw"><span class="glyphicon glyphicon-user"></span> Name:</label>
-              <input type="number" class="form-control" id="psw" placeholder="Enter your name">
-            </div>
-            <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-envelope"></span> UNCW Email:</label>
-              <input type="text" class="form-control" id="usrname" placeholder="Enter email">
-            </div>
-              <button type="submit" class="btn btn-block">Reserve
-                <span class="glyphicon glyphicon-ok"></span>
-              </button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
-            <span class="glyphicon glyphicon-remove"></span> Cancel
-          </button>
-          <p>Need <a href="#">help?</a></p>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
