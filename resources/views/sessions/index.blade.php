@@ -1,4 +1,7 @@
 <?php
+//Redirect user back to homepage if they are not an admin:
+if(!randallAuthAdmin()) header('Location: ' . $_SERVER['HTTP_REFERER']);
+
 if(!isset($message)) $message='none';
 
 $datesArray[] = '';
@@ -23,102 +26,107 @@ foreach ($sessions as $session) {
     }
 
   //Sets up timesArray[]
-  array_push($timesArray, "<li id='ID" . $session->id . "Session' class='list-group-item text-primary session_time " .
+  array_push($timesArray, "<li id='SessionID" . $session->id . "' class='list-group-item text-primary session_time " .
   date_format($date, 'n/j/Y') ."'>" . date_format($date, 'l F jS g:i:s A') .
-  "<span class='badge'>" . $session->reservations . " Reservation(s)</span></li>");
+  "<span class='teamName'> --- " . $session->teamName . " </span>" .
+  "<span class='teamCompletionTime'> --- " . $session->completionTime . " </span>" .
+  "<span class='badge'>" . $session->num_of_reservations . " Reservation(s)</span></li>");
 
   $dateHolder = $date;
 }
 
 foreach ($reservations as $reservation) {
-  array_push($reservationsArray, "<li class='list-group-item text-primary session_reservation ID" . $reservation->session . "Session'>". $reservation->user . "</li>");
+  array_push($reservationsArray, "<li class='list-group-item text-primary session_reservation SessionID" . $reservation->session_id . "'>". $reservation->name . "</li>");
 }
 
 ?>
 
 
-@extends("layouts.admin")
+@extends("layouts.main")
 
 @section("content")
 
-
-  <div class="row text-center">
-    @if ($message == 'success')
-    <div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok"></span> Session Date Added
-      <button type="button" class="close" style="color:#000 !important" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<div id="body" class="bg-1">
+  <div class="container">
+    <div class="row text-center">
+      @if ($message == 'success')
+      <div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok"></span> Session Date Added
+        <button type="button" class="close" style="color:#000 !important" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      @else
+          @foreach ($errors->all() as $error)
+              <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ $error }}
+                <button type="button" class="close" style="color:#000 !important" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+          @endforeach
+      @endif
     </div>
-    @else
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign"></span> {{ $error }}
-              <button type="button" class="close" style="color:#000 !important" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+
+      <h3 class="text-center">Sessions Dates</h3>
+        <ul id="datesList" class="list-group">
+          @for ($k = 0; $k < 6; $k++)
+            <?php echo $datesArray[$k]; ?>
+          @endfor
+        </ul>
+      <div class="row text-center">
+        <button class="btn btn-primary text-center" id="btn-previous"><span class="glyphicon glyphicon-chevron-left "></span></button>
+        <button class="btn btn-primary text-center" id="btn-next"><span class="glyphicon glyphicon-chevron-right"></span></button>
+      </div>
+
+      <h3 class="text-center">Sessions Times</h3>
+        <ul id="timesList" class="list-group">
+          <li class="list-group-item text-danger text-center">Click on a Session Date above to see Session Times</span></li>
+        </ul>
+
+      <h3 class="text-center">Reservations In Session</h3>
+        <ul id="reservationsList" class="list-group">
+          <li class="list-group-item text-danger text-center">Click on a Session Time above to see Session Reservations</span></li>
+        </ul>
+
+      <div class="row text-center">
+        <button class="btn btn-primary" style="font-size:2.5em;" data-toggle="modal" data-target="#myModal">Add Session</button>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">×</button>
+              <h4><span class="glyphicon glyphicon-calendar"></span> New Session</h4>
             </div>
-        @endforeach
-    @endif
-  </div>
-
-
-    <h3 class="text-center">Sessions Dates</h3>
-      <ul id="datesList" class="list-group">
-        @for ($k = 0; $k < 6; $k++)
-          <?php echo $datesArray[$k]; ?>
-        @endfor
-      </ul>
-    <div class="row text-center">
-      <button class="btn btn-primary text-center" id="btn-previous"><span class="glyphicon glyphicon-chevron-left "></span></button>
-      <button class="btn btn-primary text-center" id="btn-next"><span class="glyphicon glyphicon-chevron-right"></span></button>
-    </div>
-
-    <h3 class="text-center">Sessions Times</h3>
-      <ul id="timesList" class="list-group">
-        <li class="list-group-item text-danger text-center">Click on a Session Date above to see Session Times</span></li>
-      </ul>
-
-    <h3 class="text-center">Reservations In Session</h3>
-      <ul id="reservationsList" class="list-group">
-        <li class="list-group-item text-danger text-center">Click on a Session Time above to see Session Reservations</span></li>
-      </ul>
-
-    <div class="row text-center">
-      <button class="btn btn-primary" style="font-size:2.5em;" data-toggle="modal" data-target="#myModal">Add Session</button>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <h4><span class="glyphicon glyphicon-calendar"></span> New Session</h4>
-          </div>
-          <div class="modal-body">
-            <form role="form"  method="post">
-              <input type='hidden' name='_token' value='{{ csrf_token() }}'>
-              <div class="row">
-                <div style="overflow:hidden;">
-                  <div class="form-group">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <div id="datetimepicker12">
-                                  <input type='hidden' id='date' name='date' class="form-control" />
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                <button type="submit" class="btn btn-block">ADD <span class="glyphicon glyphicon-ok"></span>
-                </button>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
-              <span class="glyphicon glyphicon-remove"></span> Cancel
-            </button>
-            <p>Need <a href="#">help?</a></p>
+            <div class="modal-body">
+              <form role="form"  method="post" action="/sessions">
+                <input type='hidden' name='_token' value='{{ csrf_token() }}'>
+                <div class="row">
+                  <div style="overflow:hidden;">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="datetimepicker12">
+                                    <input type='hidden' id='date' name='date' class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  <button type="submit" class="btn btn-block">ADD <span class="glyphicon glyphicon-ok"></span>
+                  </button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+                <span class="glyphicon glyphicon-remove"></span> Cancel
+              </button>
+              <p>Need <a href="#">help?</a></p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+  </div>
+</div>
 
 @endsection
 
@@ -184,14 +192,39 @@ $(document).ready(function(){
   $(document).on('click', '.session_time', function() {
     $('#reservationsList').html('');
     var sessionTimeID = $(this).attr('id');
-    console.log(sessionTimeID);
     var sessionReservationsArray = [];
     $.each( allReservations, function( i, v ){
         if(v.indexOf(sessionTimeID) >= 0) {sessionReservationsArray.push(v);}
     });
     $('#reservationsList').append(sessionReservationsArray);
-  });
+    $('#reservationsList').append('</br>');
 
+    var sessionToUpdate = sessionTimeID.slice(9);
+    var updateTeamName =
+      "<div class='col-md-6'>" +
+          "<div id='updateTeamName' class='form-group'>" +
+            "<form role='form' method='post' action='/sessions/update'>" +
+              "<input type='hidden' name='_token' value='{{ csrf_token() }}'>" +
+              "<input type='hidden' name='sessionID' value='" + sessionToUpdate + "'>" +
+              "<input type='text' id='teamName' name='teamName' placeholder='New Team Name' class='form-control' />" +
+              "<button type='submit' class='btn btn-block'>Update Team Name</button?" +
+            "</form>" +
+          "</div>" +
+      "</div>";
+    $('#reservationsList').append(updateTeamName);
+    var updateTeamTime =
+      "<div class='col-md-6'>" +
+          "<div id='updateTeamCompletionTime' class='form-group'>" +
+            "<form role='form' method='post' action='/sessions/update'>" +
+              "<input type='hidden' name='_token' value='{{ csrf_token() }}'>" +
+              "<input type='hidden' name='sessionID' value='" + sessionToUpdate + "'>" +
+              "<input type='text' id='completionTime' name='completionTime' placeholder='00:00' class='form-control' />" +
+              "<button type='submit' class='btn btn-block'>Update Team Completion Time</button>" +
+            "</form>" +
+          "</div" +
+      "</div>";
+      $('#reservationsList').append(updateTeamTime);
+  });
 
   // Initialize Tooltip
   $('[data-toggle="tooltip"]').tooltip();

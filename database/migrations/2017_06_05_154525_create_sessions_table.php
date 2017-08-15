@@ -15,7 +15,9 @@ class CreateSessionsTable extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('date');
-            $table->integer('reservations');
+            $table->string('teamName')->default('Team Name Pending...');
+            $table->time('completionTime');
+            $table->integer('num_of_reservations');
         });
     }
 

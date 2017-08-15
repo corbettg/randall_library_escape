@@ -13,11 +13,11 @@ use App\Reservation;
 
 class SessionsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //Using Middleware to make sure that only staff members are able to access the session page.
+    public function __construct() {
+      $this->middleware('randallStaffAuth', ['only' => ['index', 'create', 'update']]);
+    }
+
     public function index()
     {
         $sessions = Session::orderBy('date', 'ASC')->get();
@@ -26,11 +26,7 @@ class SessionsController extends Controller
         return view("sessions.index")->with(compact('sessions', 'reservations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create(Request $request)
     {
         $date = new DateTime($request->date);
@@ -50,7 +46,7 @@ class SessionsController extends Controller
 
         $newSession = new Session;
         $newSession->date = $date;
-        $newSession->reservations = $reservations;
+        $newSession->num_of_reservations = $reservations;
 
         $newSession->save();
 
@@ -61,59 +57,31 @@ class SessionsController extends Controller
         return view("sessions.index")->with(compact('sessions', 'reservations', 'message'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update(Request $request)
     {
-        //
+
+        //Validate Data passed
+         $validator = Validator::make($request->all(), [
+            'teamName' => 'unique:sessions|min:3',
+            'completionTime' => 'date_format:i:s|min:3',
+        ]);
+
+        if ($validator->fails()) {
+            $sessions = Session::orderBy('date', 'ASC')->get();
+            $reservations = Reservation::orderBy('id', 'ASC')->get();
+            return view("sessions.index")->withErrors($validator)->with(compact('sessions', 'reservations'));
+        }
+
+        $sessionToUpdate = Session::find($request->sessionID);
+        if($request->teamName) $sessionToUpdate->teamName = $request->teamName;
+        if($request->completionTime) $sessionToUpdate->completionTime = $request->completionTime;
+        $sessionToUpdate->save();
+
+        $message = 'success';
+        $sessions = Session::orderBy('date', 'ASC')->get();
+        $reservations = Reservation::orderBy('id', 'ASC')->get();
+
+        return redirect()->action('SessionsController@index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

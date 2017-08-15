@@ -54,7 +54,10 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => [
+        'address' => 'libref@uncw.edu',
+        'name' => 'Randall Library',
+    ],
 
     /*
     |--------------------------------------------------------------------------

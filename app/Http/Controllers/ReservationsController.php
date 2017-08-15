@@ -2,88 +2,71 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
+use Mail;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Reservation;
 use App\Session;
+use App\Appointment;
+
+
+use App\Mail\ConfirmationEmail;
 
 class ReservationsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function create(Request $request)
     {
-        return Reservation::all();
+
+        //Validate Data passed
+         $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'user' => 'required|unique:reservations',
+            'phoneNumber' => 'regex:/[0-9]{10}/'
+        ]);
+
+        if ($validator->fails()) {
+            $anchor = 'reserve';
+            $sessions = Session::orderBy('date', 'ASC')->get();
+            $reservations = Reservation::orderBy('id', 'ASC')->get();
+            return view("home")->withErrors($validator)->with(compact('sessions', 'reservations', 'anchor'));
+        }
+
+        $session = Session::find($request->session_id);
+        $session->addReservation($request->name, $request->user, $request->phoneNumber);
+
+        $new_reservation = Reservation::where('user', $request->user)->get();
+
+        // \Mail::to($email)->send(new ConfirmationEmail);
+        // Mail::send('emails.confirmation', ['new_reservation' => $new_reservation], function ($message) use ($new_reservation) {
+        //     $message->from('libref@uncw.edu', 'Randall Library Escape Room');
+        //
+        //     $user_email = $new_reservation[0]['user'] . "@uncw.edu";
+        //
+        //     $message->to($user_email);
+        // });
+
+        if($request->phoneNumber) {
+            $newAppointmentReminder = new Appointment;
+            $newAppointmentReminder->name = $request->name;
+            $newAppointmentReminder->phoneNumber = $request->phoneNumber;
+            $newAppointmentReminder->when = $request->when;
+            $newAppointmentReminder->timezoneOffset = $request->timezoneOffset;
+            $notificationTime = Carbon::parse($request->input('when'))->subMinutes($request->delta);
+            $newAppointmentReminder->notificationTime = $notificationTime;
+
+            $newAppointmentReminder->save();
+        }
+
+        $anchor = 'reserve';
+        $message = 'success';
+        $sessions = Session::orderBy('date', 'ASC')->get();
+        $reservations = Reservation::orderBy('id', 'ASC')->get();
+        return view("home")->with(compact('sessions', 'reservations', 'message', 'anchor'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

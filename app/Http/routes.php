@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/', function () { return view('home');});
+Route::get('/login', 'RandallAuthController@login');
+Route::get('/authenticate', 'RandallAuthController@authenticate');
+Route::get('/logout', 'RandallAuthController@logout');
+
+Route::get('/', 'PagesController@index');
+Route::post('/', 'ReservationsController@create');
 
 Route::get('/reservations', 'ReservationsController@index');
 
 Route::get('/sessions', 'SessionsController@index');
 Route::post('/sessions', 'SessionsController@create');
+Route::post('/sessions/update', 'SessionsController@update');
+
+Route::get('/scheduled_reminders', 'AppointmentController@index');
